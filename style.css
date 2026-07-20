@@ -1,0 +1,852 @@
+:root {
+  --background: #f8ede7;
+  --background-light: #fffaf7;
+  --card-background: rgba(255, 255, 255, 0.76);
+
+  --text-primary: #5c4545;
+  --text-secondary: #896f6f;
+  --accent: #bd7f86;
+  --accent-dark: #9f666d;
+
+  --shadow:
+    0 18px 55px rgba(111, 75, 75, 0.15),
+    0 4px 15px rgba(111, 75, 75, 0.08);
+
+  --border: rgba(189, 127, 134, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  overflow-x: hidden;
+
+  font-family: "Comfortaa", sans-serif;
+  color: var(--text-primary);
+
+  background:
+    linear-gradient(
+      160deg,
+      #fffaf7 0%,
+      #f8ede7 48%,
+      #f0deda 100%
+    );
+}
+
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    max(24px, env(safe-area-inset-top))
+    20px
+    max(24px, env(safe-area-inset-bottom));
+
+  overflow: hidden;
+}
+
+.background-decoration {
+  position: fixed;
+
+  border-radius: 50%;
+  filter: blur(2px);
+
+  pointer-events: none;
+}
+
+.background-decoration--one {
+  top: -90px;
+  right: -95px;
+
+  width: 230px;
+  height: 230px;
+
+  background: rgba(224, 174, 178, 0.22);
+
+  animation: floatDecoration 8s ease-in-out infinite;
+}
+
+.background-decoration--two {
+  bottom: -100px;
+  left: -110px;
+
+  width: 280px;
+  height: 280px;
+
+  background: rgba(238, 205, 178, 0.24);
+
+  animation: floatDecoration 10s ease-in-out infinite reverse;
+}
+
+.intro {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 430px;
+
+  text-align: center;
+
+  animation: introAppear 0.9s ease both;
+}
+
+.intro__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 92px;
+  height: 92px;
+
+  margin-bottom: 28px;
+
+  font-size: 44px;
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: var(--shadow);
+
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.intro__small-text {
+  margin-bottom: 8px;
+
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.intro__title {
+  margin-bottom: 18px;
+
+  font-family: "Marck Script", cursive;
+  font-size: clamp(54px, 17vw, 78px);
+  font-weight: 400;
+  line-height: 0.88;
+
+  color: var(--accent-dark);
+
+  text-shadow: 0 6px 20px rgba(159, 102, 109, 0.12);
+}
+
+.intro__description {
+  max-width: 310px;
+
+  margin: 0 auto 32px;
+
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.open-button {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-width: 180px;
+  min-height: 54px;
+
+  padding: 14px 28px;
+
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+
+  border: 0;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-dark) 100%
+    );
+
+  box-shadow:
+    0 12px 28px rgba(159, 102, 109, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  cursor: pointer;
+
+  animation: buttonPulse 2.5s ease-in-out infinite;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.open-button:active {
+  transform: scale(0.96);
+}
+
+.open-button__icon {
+  font-size: 17px;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 440px;
+
+  padding: 12px 0;
+
+  animation: cardAppear 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+.card__content {
+  position: relative;
+
+  padding: 38px 24px 30px;
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 30px;
+
+  background: var(--card-background);
+  box-shadow: var(--shadow);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  overflow: hidden;
+}
+
+.card__content::before {
+  content: "";
+
+  position: absolute;
+  top: -50px;
+  right: -50px;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background: rgba(236, 186, 192, 0.18);
+}
+
+.card__content::after {
+  content: "";
+
+  position: absolute;
+  bottom: -65px;
+  left: -50px;
+
+  width: 150px;
+  height: 150px;
+
+  border-radius: 50%;
+
+  background: rgba(238, 210, 184, 0.2);
+}
+
+.card__eyebrow {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 10px;
+
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.card__title {
+  position: relative;
+  z-index: 1;
+
+  font-family: "Marck Script", cursive;
+  font-size: clamp(53px, 15vw, 72px);
+  font-weight: 400;
+  line-height: 0.9;
+
+  color: var(--accent-dark);
+}
+
+.card__divider {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  max-width: 210px;
+
+  margin: 24px auto;
+}
+
+.card__divider span:not(.card__divider-icon) {
+  width: 70px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(189, 127, 134, 0.55)
+    );
+}
+
+.card__divider span:last-child {
+  transform: rotate(180deg);
+}
+
+.card__divider-icon {
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.card__text {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 23px;
+
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.card__hint {
+  position: relative;
+  z-index: 1;
+
+  max-width: 310px;
+
+  margin: 0 auto 19px;
+
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.wishes {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 28px;
+}
+
+.wish-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  aspect-ratio: 1;
+
+  font-size: clamp(20px, 7vw, 29px);
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 6px 18px rgba(114, 77, 77, 0.08);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.wish-button:active {
+  transform: scale(0.9);
+}
+
+.wish-button.is-opened {
+  background: rgba(239, 213, 214, 0.65);
+}
+
+.wish-button--paw {
+  animation: wishFloat 3.2s ease-in-out infinite;
+}
+
+.wish-button--flower {
+  animation: wishFloat 3.5s 0.25s ease-in-out infinite;
+}
+
+.wish-button--bunny {
+  animation: wishFloat 3.1s 0.5s ease-in-out infinite;
+}
+
+.wish-button--star {
+  animation: wishFloat 3.6s 0.75s ease-in-out infinite;
+}
+
+.wish-button--heart {
+  animation: wishFloat 3.3s 1s ease-in-out infinite;
+}
+
+.card__signature {
+  position: relative;
+  z-index: 1;
+
+  color: var(--accent-dark);
+  font-family: "Marck Script", cursive;
+  font-size: 22px;
+}
+
+/* Модальное окно */
+
+.wish-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    max(20px, env(safe-area-inset-top))
+    20px
+    max(20px, env(safe-area-inset-bottom));
+}
+
+.wish-modal__backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(70, 48, 48, 0.35);
+
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  animation: fadeIn 0.25s ease both;
+}
+
+.wish-modal__window {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 360px;
+
+  padding: 34px 24px 26px;
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(253, 241, 238, 0.96)
+    );
+
+  box-shadow:
+    0 24px 70px rgba(71, 45, 45, 0.25);
+
+  animation: modalAppear 0.35s cubic-bezier(0.2, 0.85, 0.3, 1.2) both;
+}
+
+.wish-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+
+  width: 36px;
+  height: 36px;
+
+  color: var(--text-secondary);
+  font-size: 27px;
+  line-height: 1;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.wish-modal__icon {
+  margin-bottom: 12px;
+
+  font-size: 43px;
+
+  animation: iconFloat 2.5s ease-in-out infinite;
+}
+
+.wish-modal__title {
+  margin-bottom: 13px;
+
+  color: var(--accent-dark);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.wish-modal__text {
+  margin-bottom: 24px;
+
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.wish-modal__button {
+  min-width: 135px;
+  min-height: 45px;
+
+  padding: 11px 22px;
+
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: var(--accent);
+
+  box-shadow: 0 8px 20px rgba(189, 127, 134, 0.25);
+
+  cursor: pointer;
+}
+
+/* Частицы */
+
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+
+  animation: particleFly 1.25s ease-out forwards;
+}
+
+/* Вспомогательные классы */
+
+.hidden {
+  display: none !important;
+}
+
+.intro.is-closing {
+  animation: introClose 0.55s ease forwards;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Анимации */
+
+@keyframes introAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introClose {
+  to {
+    opacity: 0;
+    transform: scale(0.92) translateY(-15px);
+  }
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.82) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(2deg);
+  }
+}
+
+@keyframes wishFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes buttonPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 12px 28px rgba(159, 102, 109, 0.28),
+      0 0 0 0 rgba(189, 127, 134, 0.22);
+  }
+
+  50% {
+    box-shadow:
+      0 14px 30px rgba(159, 102, 109, 0.32),
+      0 0 0 10px rgba(189, 127, 134, 0);
+  }
+}
+
+@keyframes floatDecoration {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(8px, 15px, 0);
+  }
+}
+
+@keyframes particleFly {
+  0% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(0.5)
+      rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--particle-x)),
+        calc(-50% + var(--particle-y))
+      )
+      scale(1.25)
+      rotate(var(--particle-rotate));
+  }
+}
+
+/* Очень маленькие телефоны */
+
+@media (max-width: 360px) {
+  .page {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .card__content {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .wishes {
+    gap: 5px;
+  }
+
+  .wish-button {
+    border-radius: 15px;
+  }
+}
+
+/* Горизонтальная ориентация */
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .page {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .intro {
+    padding: 20px 0;
+  }
+
+  .card {
+    padding: 10px 0 24px;
+  }
+}
+
+/* Для людей, отключивших анимации */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* Имя автора */
+
+.card__author {
+  position: relative;
+  z-index: 1;
+
+  margin-top: 5px;
+
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Постоянные фоновые праздничные элементы */
+
+.falling-elements {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.falling-element {
+  position: absolute;
+  top: -80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+
+  user-select: none;
+  will-change: transform, opacity;
+
+  animation-name: fallingElement;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.falling-element--balloon {
+  filter: drop-shadow(0 7px 6px rgba(105, 71, 71, 0.12));
+}
+
+.falling-element--small {
+  filter: drop-shadow(0 4px 4px rgba(105, 71, 71, 0.08));
+}
+
+@keyframes fallingElement {
+  0% {
+    opacity: 0;
+    transform:
+      translate3d(0, -60px, 0)
+      rotate(var(--start-rotation))
+      scale(var(--element-scale));
+  }
+
+  10% {
+    opacity: var(--element-opacity);
+  }
+
+  45% {
+    transform:
+      translate3d(var(--sway-one), 45vh, 0)
+      rotate(var(--middle-rotation))
+      scale(var(--element-scale));
+  }
+
+  90% {
+    opacity: var(--element-opacity);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate3d(var(--sway-two), 115vh, 0)
+      rotate(var(--end-rotation))
+      scale(var(--element-scale));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .falling-elements {
+    display: none;
+  }
+}
