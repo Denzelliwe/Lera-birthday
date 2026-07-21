@@ -54,10 +54,25 @@
     <section class="card hidden" id="birthdayCard">
         <div class="card__content">
             <p class="card__eyebrow">Сегодня твой день, Лера</p>
+            <div class="photo-frame">
+                <img
+                        class="photo-frame__image"
+                        src="lera-photo.jpg"
+                        alt="Фотография Леры"
+                        onerror="
+      this.style.display='none';
+      this.parentElement.classList.add('photo-frame--empty');
+    "
+                />
 
+                <div class="photo-frame__placeholder" aria-hidden="true">
+                    <span>📷</span>
+                    <small>Фото Леры</small>
+                </div>
+            </div>
             <h2 class="card__title">
-                С днём<br />
-                рождения!
+                С Днём<br />
+                Рождения!
             </h2>
 
             <div class="card__divider">
@@ -67,19 +82,17 @@
             </div>
 
             <p class="card__text">
-                Я хотел сделать для тебя не просто обычное поздравление,
-                а что-нибудь небольшое и особенное.
+                Хотелось сделать что-то необычное :)
             </p>
 
             <p class="card__text">
                 Желаю тебе больше спокойных и счастливых дней,
-                приятных неожиданностей, вдохновения и людей,
-                рядом с которыми тебе всегда будет тепло и легко.
+                приятных неожиданностей, вдохновения и исполнения всех-всех твоих идей и мечтаний.
             </p>
 
             <p class="card__hint">
                 Здесь спрятано ещё несколько маленьких пожеланий.
-                Нажимай на значки ниже
+                Тыцяй на значки ниже
             </p>
 
             <div class="wishes" aria-label="Скрытые пожелания">
@@ -107,7 +120,7 @@
                         class="wish-button wish-button--bunny"
                         type="button"
                         data-title="Немного поддержки"
-                        data-message="Я знаю, что сейчас в твоей жизни непростой период. Хочу пожелать тебе сил пройти через него. Пусть рядом будут люди, на которых можно опереться, а впереди станет спокойнее и легче."
+                        data-message="Я знаю, что сейчас в твоей жизни непростой период. Хочу пожелать тебе сил пройти через него. Ты всегда можешь обратиться за любой помощью и поддержкой."
                         aria-label="Открыть поддерживающее пожелание"
                 >
                     🐇
@@ -133,7 +146,38 @@
                     🤍
                 </button>
             </div>
+            <div class="wishes-progress" id="wishesProgress">
+                <div class="wishes-progress__header">
+                    <span>Маленькие пожелания</span>
 
+                    <span id="progressCounter">
+      0 из 5
+    </span>
+                </div>
+
+                <div
+                        class="wishes-progress__track"
+                        role="progressbar"
+                        aria-label="Прогресс открытия пожеланий"
+                        aria-valuemin="0"
+                        aria-valuemax="5"
+                        aria-valuenow="0"
+                        id="progressBar"
+                >
+                    <div
+                            class="wishes-progress__fill"
+                            id="progressFill"
+                    ></div>
+                </div>
+
+                <div class="wishes-progress__stars" id="progressStars">
+                    <span>☆</span>
+                    <span>☆</span>
+                    <span>☆</span>
+                    <span>☆</span>
+                    <span>☆</span>
+                </div>
+            </div>
             <p class="card__signature">
                 Искренне и с найлучшими пожеланиями,
             </p>
@@ -177,6 +221,69 @@
 
         <button class="wish-modal__button" id="modalOkButton" type="button">
             Спасибо
+        </button>
+    </div>
+</div>
+<!-- Финальное сообщение после открытия всех пожеланий -->
+<div
+        class="final-modal hidden"
+        id="finalModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="finalModalTitle"
+>
+    <div
+            class="final-modal__backdrop"
+            id="finalModalBackdrop"
+    ></div>
+
+    <div class="final-modal__window">
+        <div class="final-modal__decoration" aria-hidden="true">
+            🎉
+        </div>
+
+        <p class="final-modal__eyebrow">
+            Все пожелания найдены
+        </p>
+
+        <h3 class="final-modal__title" id="finalModalTitle">
+            Лера, ещё раз<br />
+            с Днём Рождения!
+        </h3>
+
+        <div class="final-modal__divider">
+            <span></span>
+            <span>✦</span>
+            <span></span>
+        </div>
+
+        <p class="final-modal__text">
+            Спасибо, что открыла эту маленькую открытку.
+            Сделал, как смог :)
+        </p>
+
+        <p class="final-modal__text">
+            Я знаю, что сейчас тебе непросто.
+            Очень хочу, чтобы впереди у тебя стало больше спокойных,
+            светлых дней и моментов, в которых ты сможешь чувствовать
+            себя счастливой.
+        </p>
+
+        <p class="final-modal__message">
+            Надеюсь, этот небольшой подарок смог подарить тебе
+            хотя бы одну улыбку.
+        </p>
+
+        <p class="final-modal__signature">
+            Денис
+        </p>
+
+        <button
+                class="final-modal__button"
+                id="closeFinalModalButton"
+                type="button"
+        >
+            Спасибо ✨
         </button>
     </div>
 </div>
